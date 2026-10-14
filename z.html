@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信聊天记录</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ededed;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ededed;
+            height: 100vh;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .message-row {
+            display: flex;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .message-row.left {
+            justify-content: flex-start;
+        }
+
+        .message-row.right {
+            justify-content: flex-end;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: #000000;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bubble {
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            position: relative;
+            color: #000000;
+            background-color: #ffffff;
+            border: 1px solid #e5e5e5;
+        }
+
+        .bubble.left::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: -6px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid #ffffff;
+        }
+        
+        .bubble.left::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: -7px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid #e5e5e5;
+            z-index: -1;
+        }
+
+        /* 右侧自定义输入框 */
+        .custom-input-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .custom-input {
+            width: 70%;
+            max-width: 240px;
+            font-size: 15px;
+            color: #333333;
+            text-align: right;
+            padding: 10px 4px;
+            line-height: 1.5;
+            border: none;
+            border-bottom: 2px solid #333;
+            background: transparent;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .custom-input::placeholder {
+            color: #999;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        
+        <!-- 左侧消息，去掉名字，保留黑色头像 -->
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">不要只为别人驾驶EVA</div>
+            </div>
+        </div>
+
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">错的不是你 是这个世界</div>
+            </div>
+        </div>
+
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">战争结束了 朱雨欣</div>
+            </div>
+        </div>
+
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">朱雨欣，万水千山你愿意陪我看吗</div>
+            </div>
+        </div>
+
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">朱雨欣，对他使用炎拳吧</div>
+            </div>
+        </div>
+
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">朱雨欣，谢谢你为我戴上围巾</div>
+            </div>
+        </div>
+
+        <div class="message-row left">
+            <div class="avatar"></div>
+            <div class="message-content">
+                <div class="bubble left">朱雨欣，我喜欢你。</div>
+            </div>
+        </div>
+
+        <!-- 右侧自定义输入，不固定文字，可自己打字 -->
+        <div class="custom-input-wrapper">
+            <input type="text" class="custom-input" placeholder="请输入你的回答..." id="userInput">
+        </div>
+
+    </div>
+
+    <script>
+        // 可选：按回车键时，把输入框的内容变成一条普通文本显示在右侧（如果不需要可以删掉这段）
+        const input = document.getElementById('userInput');
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && input.value.trim() !== '') {
+                const text = input.value.trim();
+                input.value = '';
+                input.placeholder = text; // 将输入内容作为占位符显示，模拟发送效果
+            }
+        });
+    </script>
+
+</body>
+</html>
